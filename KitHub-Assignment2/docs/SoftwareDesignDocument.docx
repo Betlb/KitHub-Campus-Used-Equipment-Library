@@ -1,1 +1,12 @@
  
+The KitHub system is a web-based application designed to support temporary borrowing of campus equipment such as lab tools, cameras, and sports gear. It aims to enhance sustainability and reduce costs by allowing students to borrow instead of purchase rarely used equipment.
+
+The selected use case for this assignment is Borrow Equipment. This is a core operation in the system and involves:
+
+  - Students requesting an item,
+   
+  - The system evaluating the request using predefined borrowing strategies,
+   
+  - The administrator approving or rejecting the request.
+
+The use case implements the Strategy Design Pattern to dynamically switch between borrowing rules based on user type or equipment category.
