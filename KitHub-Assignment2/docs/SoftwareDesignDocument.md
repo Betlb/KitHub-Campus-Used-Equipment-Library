@@ -300,10 +300,42 @@ Thanks to the layered architecture, any of the above systems can be connected in
 
 ---
 
-## Performance Considerations -aylin
+## Performance Considerations
 
-* Handle multiple concurrent borrow requests.
-* UI responsiveness, database indexing.
+The performance expectations for the “Borrow Equipment” use case in **KitHub** are as follows:
+
+## Performance Metrics
+
+| Metric                  | Target Value                                              |
+|-------------------------|-----------------------------------------------------------|
+| **Page Load Time**      | Under 2 seconds on a standard broadband connection        |
+| **API Response Time**   | Under 1 second for borrow request submission              |
+| **Concurrent Requests** | Up to 50 simultaneous users without degradation           |
+| **Borrow Logic Execution** | Strategy selection and processing < 200ms              |
+
+These values were selected to support a mid-sized university user base and provide a smooth, responsive experience.
+
+---
+
+## Scalability Strategy
+
+- **Stateless Backend**:  
+  Designed with RESTful APIs, enabling horizontal scaling using container orchestration tools (e.g., Docker + Kubernetes).
+
+- **Database Optimization**:
+  - Use of indexes on `EquipmentID` and `Status`
+  - Optimized `SELECT` queries with proper joins
+
+- **Asynchronous Processing (Future Scope)**:
+  - Notification emails or reminders to be processed in background queues (e.g., Celery or RabbitMQ)
+
+---
+
+## Performance Testing Strategy
+
+- Manual testing conducted with simulated concurrent user sessions  
+- Use of tools such as **Postman** for endpoint latency tracking  
+- **Chrome Lighthouse** audits for frontend speed feedback  
 
 ---
 
