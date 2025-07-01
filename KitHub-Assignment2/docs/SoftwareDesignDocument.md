@@ -314,7 +314,7 @@ Errors and warnings are recorded in a rotating log file to maintain traceability
 | Version | Date       | Author               | Change Description                                      |
 |---------|------------|----------------------|----------------------------------------------------------|
 | 1.0     | 28.06.2025 | All team members     | Initial draft of SDD created and reviewed               |
-| 1.1     | 29.06.2025 | İlBey Efe Taşabatlı  | Updated strategy pattern section and DFD diagram        |
+| 1.1     | 29.06.2025 | İlbey Efe Taşabatlı  | Updated strategy pattern section and DFD diagram        |
 | 1.2     | 30.06.2025 | Mehmet Karatekin     | Added testability documentation and test files          |
 | 1.3     | 01.07.2025 | Aylin Barutçu        | Completed deployment instructions and setup notes       |
 
@@ -342,13 +342,13 @@ Errors and warnings are recorded in a rotating log file to maintain traceability
 | Task                         | Description                                         | Responsible Member   |
 |------------------------------|-----------------------------------------------------|-----------------------|
 | System Overview              | Project introduction and use case context           | Aylin Barutçu         |
-| System Context + UML Diagram | Use case boundary and actor diagram                 | İlBey Efe Taşabatlı   |
+| System Context + UML Diagram | Use case boundary and actor diagram                 | İlbey Efe Taşabatlı   |
 | Key Features & Functionality | Explanation of how system meets use case goals      | Betül Biçer           |
 | Component Design + Diagram   | Subsystems, responsibilities and visuals            | Mehmet Karatekin      |
-| Data Design + ER & DFD       | Entity modeling, DFD creation                       | İlBey Efe Taşabatlı   |
+| Data Design + ER & DFD       | Entity modeling, DFD creation                       | İlbey Efe Taşabatlı   |
 | Design Pattern Integration   | Strategy pattern logic, context, and usage          | Aylin Barutçu         |
 | UI Design & Mockups          | Interface logic and sketches                        | Betül Biçer           |
 | Performance & Error Handling | Performance goals, exceptions, and logging          | Mehmet Karatekin      |
-| Testability & Deployment     | How the system will be tested, configured, deployed | İlBey Efe Taşabatlı   |
-| Change Log                   | Versioning of design process                        | İlBey Efe Taşabatlı   |
+| Testability & Deployment     | How the system will be tested, configured, deployed | İlbey Efe Taşabatlı   |
+| Change Log                   | Versioning of design process                        | İlbey Efe Taşabatlı   |
 | Future Work & Open Issues    | What’s left, known bugs, and future plans           | Betül Biçer           |
