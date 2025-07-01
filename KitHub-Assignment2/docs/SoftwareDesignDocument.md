@@ -166,11 +166,29 @@ The `Strategy` interface supports pluggable policies such as:
 
 ---
 
-## Component Design -mehmet
+## Component Design
 
-* Break system into components/modules.
-* Describe responsibilities and interactions.
+### Subsystems and Modules
 
+The "Borrow Equipment" system is structured into well-defined subsystems and modules, each responsible for a specific aspect of the borrowing process. At the core of the architecture is the `BorrowController`, which acts as the entry point for handling borrow requests originating from the frontend. It delegates the processing logic to the `BorrowService`, which contains the primary business logic and coordinates interactions with other components.
+
+To enforce borrowing rules, the system utilizes a flexible strategy design pattern. This is implemented via the `BorrowStrategy` interface, which defines the core contract for all strategy classes. Concrete implementations such as `StandardBorrowStrategy` and `RestrictedBorrowStrategy` apply specific eligibility rules depending on user roles, item categories, or historical borrowing data. The persistence of borrow requests is managed by the `BorrowRepository`, which communicates with a MySQL database. Meanwhile, the `NotificationService` is responsible for alerting users and administrators about the status of their requests through emails or dashboard notifications.
+
+### Component Responsibilities
+
+The `BorrowController` exposes a borrow request endpoint (e.g., `/api/borrow`) and acts as a conduit between the frontend and backend systems. Upon receiving a request, it packages the user and item data and forwards it to the `BorrowService`.
+
+The `BorrowService` orchestrates the business logic by selecting the appropriate borrowing strategy through a `StrategySelector`, validating the request, and deciding whether to persist it or return an error. It serves as the central hub connecting validation, data management, and user communication.
+
+All borrowing rules are encapsulated within implementations of the `BorrowStrategy` interface. Each strategy must define two core methods: `is_eligible(user, item)` to assess whether the borrow request meets defined criteria, and `get_max_duration()` to enforce duration limits.
+
+Data operations are handled by the `BorrowRepository`, which executes the SQL queries necessary to save requests and retrieve their status. On the communication front, the `NotificationService` generates and delivers context-aware messages, informing users and admins of approval or rejection outcomes.
+
+### Interfaces Between Components
+
+The interaction flow between components is both logical and decoupled. The `BorrowController` communicates directly with the `BorrowService`, which in turn interacts with multiple subsystems: the selected `BorrowStrategy` for rule validation, the `BorrowRepository` for database operations, and the `NotificationService` for user updates.
+
+This modular setup ensures high cohesion within each component and low coupling between components. As a result, the system remains maintainable, extensible, and testable—ideal for scaling or integrating new features in the future.
 ---
 
 ## Data Design
@@ -473,6 +491,7 @@ The “Borrow Equipment” use case is integrated within the main backend servic
 | 1.2     | 30.06.2025 | Mehmet Karatekin     | Added testability documentation and test files          |
 | 1.3     | 01.07.2025 | Aylin Barutçu        | Completed deployment instructions and setup notes       |
 | 1.4     | 01.07.2025 | Mehmet Karatekin     | Added Key Features and Functionality section            |
+| 1.5     | 01.07.2025 | Mehmet Karatekin     | Added Component Design section                          |
 
 
 ---
