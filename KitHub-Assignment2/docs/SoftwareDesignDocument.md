@@ -153,8 +153,8 @@ This section describes the primary UI components supporting the **"Borrow Equipm
 - **Function:** Confirms the request has been submitted and provides status tracking link.
 
 ## UI Mockup
-![](borrow-request-flow-wireframe.png)
 A wireframe showing the interaction from catalog → detail → borrow form → confirmation has been generated.
+![](borrow-request-flow-wireframe.png)
 
 ## Design Principles Followed
 
