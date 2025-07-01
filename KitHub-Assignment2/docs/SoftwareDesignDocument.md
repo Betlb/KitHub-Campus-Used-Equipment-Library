@@ -40,3 +40,4 @@ This system does not integrate with any external services or university database
 - Backend logic invokes appropriate borrowing strategy.
 - Database stores/updates state of requests and items.
 
+![](context-diagram.png)
