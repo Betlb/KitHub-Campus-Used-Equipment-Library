@@ -44,7 +44,34 @@ This system does not integrate with any external services or university database
 
 ---
 
-## Key Features and Functionality -Mehmet
+## Key Features and Functionality
+
+
+### Overview
+
+This implementation of the "Borrow Equipment" use case offers a comprehensive and adaptable system designed to efficiently manage item borrowing requests within a campus setting. It allows logged-in students to browse and select available equipment from a centralized catalog. Once an item is chosen, students can fill out a structured borrow form to specify their preferred borrowing times and include any relevant notes. This ensures a user-friendly and intuitive process for initiating equipment loans.
+
+### Flexible Borrowing Rules with Strategy Pattern
+
+A standout feature of the system is its use of the Strategy Pattern to manage borrowing rules. This design approach enables the encapsulation of various borrow validation strategies based on factors such as the user’s role, the type of equipment, and previous borrowing history. The flexibility of this architecture allows administrators to introduce or adjust borrowing policies without having to alter the core borrow request logic, making the system highly maintainable and adaptable to evolving needs.
+
+### Admin Approval Workflow
+
+Once a student submits a request, it enters an administrative workflow for approval. Admins can review pending requests from their dashboard, approve or deny them, and include optional notes when providing feedback. Decisions made by the admin automatically trigger notifications to keep students informed of the outcome, enhancing communication and transparency.
+
+### Real-Time Status Management
+
+The system also ensures real-time status management of all equipment. When a request is approved or an item is returned, the equipment's availability is updated instantly. Users can view their current borrow status and history through their personal dashboards, which promotes accountability and convenience.
+
+### Modular and Extensible Architecture
+
+Underpinning this functionality is a modular and extensible system architecture. The borrowing logic is broken into separate, reusable components, which not only improves testability but also minimizes code duplication. This setup allows for easy integration of new rules or features—such as giving priority to certain student groups or imposing limits on borrow durations—without disrupting existing functionality.
+
+### Input Validation and User Feedback
+
+Finally, the system includes thorough input validation and responsive user feedback. It checks for scheduling conflicts, ensures equipment is available, and confirms compliance with applicable rules before processing any requests. Users receive clear, contextual error or confirmation messages, helping them understand the status of their request and guiding them toward successful submissions.
+
+
 
 
 ---
@@ -445,6 +472,7 @@ The “Borrow Equipment” use case is integrated within the main backend servic
 | 1.1     | 29.06.2025 | İlbey Efe Taşabatlı  | Updated strategy pattern section and DFD diagram        |
 | 1.2     | 30.06.2025 | Mehmet Karatekin     | Added testability documentation and test files          |
 | 1.3     | 01.07.2025 | Aylin Barutçu        | Completed deployment instructions and setup notes       |
+| 1.4     | 01.07.2025 | Mehmet Karatekin     | Added Key Features and Functionality section            |
 
 
 ---
