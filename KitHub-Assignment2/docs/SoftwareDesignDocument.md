@@ -221,10 +221,33 @@ Thanks to the layered architecture, any of the above systems can be connected in
 
 ---
 
-## Error Handling and Logging -ilbey
+## Error Handling and Logging
 
-* Logging failed borrow attempts.
-* Invalid inputs, unavailable items.
+## Exception Management
+
+To ensure system stability and provide clear feedback to users, all critical operations—especially those involved in the borrowing process—are wrapped in structured error handling. Key areas addressed include:
+
+- Invalid equipment ID or unavailable equipment  
+- Incomplete borrow request forms  
+- Database connection issues  
+- Unauthorized access attempts  
+
+## Logging Mechanisms
+
+Every borrow request is logged with the following details:
+
+- Timestamp  
+- User ID  
+- Equipment ID  
+- Borrowing strategy used  
+
+Errors and warnings are recorded in a rotating log file to maintain traceability and enable efficient debugging.
+
+## Monitoring & Debugging
+
+- **Frontend:** All validation errors are shown inline in the borrow form for immediate user feedback.  
+- **Backend:** Logged errors are stored in files and may later be integrated with monitoring tools like Loggly or the ELK Stack for advanced tracking and analysis.
+
 
 ---
 
