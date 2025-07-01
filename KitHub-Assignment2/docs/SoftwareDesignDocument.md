@@ -227,10 +227,31 @@ The data is stored in a **MySQL database**. Table definitions:
 
 ---
 
-## Design Patterns -mehmet
+## Design Patterns
 
-* Strategy Pattern (used for borrow rules).
-* List any additional patterns and their roles.
+### Context
+
+In KitHub, the borrowing process for campus equipment involves varying rules depending on several dynamic factors. For instance, the type of equipment—whether lab tools, cameras, or sports gear—can dictate different borrowing conditions. Additionally, borrower roles, such as regular students versus club members, also influence eligibility and loan privileges. The loan duration itself may be capped differently based on these variables. Due to these contextual nuances, the Strategy Pattern is a natural fit. It allows each borrowing rule to be encapsulated in its own class, making the system adaptable and easy to extend as new borrowing policies emerge.
+
+### Why Strategy Pattern?
+
+The application of the Strategy Pattern here aligns closely with solid design principles, particularly the Open/Closed Principle. This means the borrow logic is open for extension but closed for modification. Developers can introduce new borrow policies by simply creating new strategy classes, without touching the core logic already in place. This structure also significantly improves testability. Since each borrow strategy is an isolated unit, mock strategies can be easily injected during unit testing, resulting in clearer and more maintainable test cases. More broadly, the use of this pattern supports a clean separation of concerns, as each strategy class focuses solely on its specific borrowing rules without being entangled in other responsibilities.
+
+### How It’s Applied
+
+The foundation of this approach is a shared interface: `BorrowStrategy`. This defines a single method, `execute_borrow(user, equipment)`, which every strategy implementation must override. For example, `StandardBorrowStrategy` provides the default behavior by assigning a 7-day loan period. In contrast, `ClubBorrowStrategy` extends this privilege, allowing club members to borrow items for up to 14 days. These classes remain focused and concise, each returning a `LoanRecord` object that captures the terms of the borrow transaction.
+
+To execute borrowing behavior, a `BorrowContext` class is used. This context is initialized with a specific strategy and exposes a `borrow()` method. Internally, it simply delegates the borrow logic to the provided strategy. This structure keeps the context flexible and reusable for any future strategies that might be introduced.
+
+### Project Structure and Usage
+
+The implementation is cleanly organized under the `/src/borrow/` directory. Strategy classes reside in `borrow_strategy.py`, the context logic is housed in `borrow_context.py`, and all related unit tests are defined in `test_borrow.py`. This structure keeps the borrowing feature modular and easy to maintain.
+
+In practice, the system selects the appropriate strategy based on the user’s role. For example, if the user is a club member, the `ClubBorrowStrategy` is applied; otherwise, the system defaults to `StandardBorrowStrategy`. Once the strategy is chosen, the `BorrowContext` takes over and executes the logic, returning the configured loan details.
+
+### Measurable Improvement
+
+This refactoring has produced immediate benefits. What was once around 80 lines of intertwined borrow logic has now been distilled into small, focused classes—each under 30 lines of code. In parallel, four new unit test cases have been added, each targeting specific strategies and ensuring correctness in diverse scenarios. Most notably, adding a new borrowing rule no longer requires touching the existing system. Developers simply introduce a new class, implement the strategy interface, and integrate it—no changes to the core borrowing logic are necessary. This marks a meaningful step forward in both maintainability and scalability.
 
 ---
 
