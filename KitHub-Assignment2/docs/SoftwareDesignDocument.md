@@ -44,7 +44,8 @@ This system does not integrate with any external services or university database
 
 ---
 
-## Key Features and Functionality
+## Key Features and Functionality -Mehmet
+
 
 ---
 
@@ -87,90 +88,90 @@ This system does not integrate with any external services or university database
   A set of strategy classes define the rules for different borrowing policies (e.g., max borrow length, eligibility, item restrictions).
 
 
-## Architectural Design
+## Architectural Design -aylin
 
 * Outline overall architecture (e.g., client-server, MVC).
 * Provide diagrams if needed.
 
 ---
 
-## Component Design
+## Component Design -mehmet
 
 * Break system into components/modules.
 * Describe responsibilities and interactions.
 
 ---
 
-## Data Design
+## Data Design -hepimiz
 
 * Outline database schema, data models.
 * Mention normalization, relationships, key fields.
 
 ---
 
-## Design Patterns
+## Design Patterns -mehmet
 
 * Strategy Pattern (used for borrow rules).
 * List any additional patterns and their roles.
 
 ---
 
-## Implementation Notes
+## Implementation Notes -aylin
 
 * Languages used (e.g., JavaScript, Python).
 * Frameworks or constraints to consider.
 
 ---
 
-## User Interface Design
+## User Interface Design -betül
 
 * Basic UI structure.
 * Key screens: Borrow Page, Admin Panel, Login.
 
 ---
 
-## External Interfaces
+## External Interfaces -ilbey
 
 * None for MVP.
 * Future: LDAP, university database, email services.
 
 ---
 
-## Performance Considerations
+## Performance Considerations -aylin
 
 * Handle multiple concurrent borrow requests.
 * UI responsiveness, database indexing.
 
 ---
 
-## Error Handling and Logging
+## Error Handling and Logging -ilbey
 
 * Logging failed borrow attempts.
 * Invalid inputs, unavailable items.
 
 ---
 
-## Design for Testability
+## Design for Testability -mehmet
 
 * Unit tests for borrow strategy.
 * Mock database for testing workflows.
 
 ---
 
-## Deployment and Installation Design
+## Deployment and Installation Design -aylin
 
 * Local deployment instructions.
 * Suggested hosting platforms (e.g., Heroku, university server).
 
 ---
 
-## Change Log
+## Change Log -ilbey
 
 * v1.0 – Initial version with MVP use case.
 
 ---
 
-## Future Work / Open Issues
+## Future Work / Open Issues -betül
 
 * Add equipment return functionality.
 * Notifications for overdue items.
