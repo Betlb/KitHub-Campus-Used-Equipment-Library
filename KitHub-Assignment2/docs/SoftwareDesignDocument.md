@@ -41,3 +41,101 @@ This system does not integrate with any external services or university database
 - Database stores/updates state of requests and items.
 
 ![](context-diagram.png)
+
+---
+
+## Assumptions and Dependencies
+
+* List any assumptions (e.g., user always authenticates).
+* Describe dependencies such as frameworks, services, or libraries.
+
+---
+
+## Architectural Design
+
+* Outline overall architecture (e.g., client-server, MVC).
+* Provide diagrams if needed.
+
+---
+
+## Component Design
+
+* Break system into components/modules.
+* Describe responsibilities and interactions.
+
+---
+
+## Data Design
+
+* Outline database schema, data models.
+* Mention normalization, relationships, key fields.
+
+---
+
+## Design Patterns
+
+* Strategy Pattern (used for borrow rules).
+* List any additional patterns and their roles.
+
+---
+
+## Implementation Notes
+
+* Languages used (e.g., JavaScript, Python).
+* Frameworks or constraints to consider.
+
+---
+
+## User Interface Design
+
+* Basic UI structure.
+* Key screens: Borrow Page, Admin Panel, Login.
+
+---
+
+## External Interfaces
+
+* None for MVP.
+* Future: LDAP, university database, email services.
+
+---
+
+## Performance Considerations
+
+* Handle multiple concurrent borrow requests.
+* UI responsiveness, database indexing.
+
+---
+
+## Error Handling and Logging
+
+* Logging failed borrow attempts.
+* Invalid inputs, unavailable items.
+
+---
+
+## Design for Testability
+
+* Unit tests for borrow strategy.
+* Mock database for testing workflows.
+
+---
+
+## Deployment and Installation Design
+
+* Local deployment instructions.
+* Suggested hosting platforms (e.g., Heroku, university server).
+
+---
+
+## Change Log
+
+* v1.0 – Initial version with MVP use case.
+
+---
+
+## Future Work / Open Issues
+
+* Add equipment return functionality.
+* Notifications for overdue items.
+* Mobile support.
