@@ -123,12 +123,53 @@ This system does not integrate with any external services or university database
 
 ---
 
-## User Interface Design -betül
+## User Interface Design
 
-* Basic UI structure.
-* Key screens: Borrow Page, Admin Panel, Login.
+This section describes the primary UI components supporting the **"Borrow Equipment"** use case. The goal is to ensure a smooth and intuitive borrowing experience with clear access to equipment listings, borrow forms, and confirmation feedback.
 
----
+## Key Screens
+
+### Equipment Catalog Page
+- **Function:** Displays available equipment with filters (category, availability).
+- **Features:**
+  - Category dropdown  
+  - Search bar  
+  - Status badge (Available / Borrowed)
+
+### Equipment Detail Page
+- **Function:** Shows individual equipment details, including description and condition.
+- **Features:**
+  - “Borrow Now” button (visible if item is available)  
+  - Estimated return date info
+
+### Borrow Request Form (Modal or Page)
+- **Function:** Collects information from the user for a borrow request.
+- **Fields:**
+  - Start Date  
+  - Return Date  
+  - Notes (optional)
+
+### Borrow Confirmation Page or Popup
+- **Function:** Confirms the request has been submitted and provides status tracking link.
+
+## UI Mockup
+![](borrow-request-flow-wireframe.png)
+A wireframe showing the interaction from catalog → detail → borrow form → confirmation has been generated.
+
+## Design Principles Followed
+
+- **Minimal click depth:** All borrow actions reachable within 2–3 clicks.  
+- **Clean layout:** Focus on usability for non-technical students.  
+- **Accessibility:** High contrast text and large buttons for usability on mobile and desktop.  
+- **Responsive Design:** Mobile, tablet, and desktop compatibility.
+
+## Task Matrix Entry
+
+| Task                      | Description                                     | Responsible Member |
+|---------------------------|-------------------------------------------------|---------------------|
+| Wireframe & UI Flow Design | Designed user flow for borrow request pages     | Betül Biçer         |
+| UI Documentation           | Wrote descriptions of user interface steps      | Betül Biçer         |
+
 
 ## External Interfaces -ilbey
 
