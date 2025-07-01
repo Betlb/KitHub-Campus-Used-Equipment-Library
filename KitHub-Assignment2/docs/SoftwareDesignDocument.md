@@ -293,3 +293,18 @@ Errors and warnings are recorded in a rotating log file to maintain traceability
 - Mobile-responsive UI improvements
 - Admin analytics panel for borrow trends and stock usage
 
+## Task Matrix
+
+| Task                         | Description                                         | Responsible Member   |
+|------------------------------|-----------------------------------------------------|-----------------------|
+| System Overview              | Project introduction and use case context           | Aylin Barutçu         |
+| System Context + UML Diagram | Use case boundary and actor diagram                 | İlBey Efe Taşabatlı   |
+| Key Features & Functionality | Explanation of how system meets use case goals      | Betül Biçer           |
+| Component Design + Diagram   | Subsystems, responsibilities and visuals            | Mehmet Karatekin      |
+| Data Design + ER & DFD       | Entity modeling, DFD creation                       | İlBey Efe Taşabatlı   |
+| Design Pattern Integration   | Strategy pattern logic, context, and usage          | Aylin Barutçu         |
+| UI Design & Mockups          | Interface logic and sketches                        | Betül Biçer           |
+| Performance & Error Handling | Performance goals, exceptions, and logging          | Mehmet Karatekin      |
+| Testability & Deployment     | How the system will be tested, configured, deployed | İlBey Efe Taşabatlı   |
+| Change Log                   | Versioning of design process                        | İlBey Efe Taşabatlı   |
+| Future Work & Open Issues    | What’s left, known bugs, and future plans           | Betül Biçer           |
