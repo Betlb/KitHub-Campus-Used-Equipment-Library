@@ -438,10 +438,39 @@ Errors and warnings are recorded in a rotating log file to maintain traceability
 
 ---
 
-## Design for Testability -mehmet
+## Design for Testability
 
-* Unit tests for borrow strategy.
-* Mock database for testing workflows.
+### Testability Goals
+
+A key objective in designing the borrow equipment system has been to ensure that it is highly testable at every level of the architecture. The adoption of the Strategy Pattern plays a significant role here, as it enables modular testing of different borrow logic scenarios without altering the core flow. Each strategy implementation can be tested in isolation, allowing for more focused and meaningful unit tests. To support maintainability and reliability, the system is designed to minimize external dependencies—particularly through the use of mocking for both the database layer and the borrow strategies. This isolation enables tests to run quickly and consistently. The overarching goal is to achieve over 80% code coverage across all core components related to borrowing, which ensures a strong foundation for long-term quality and change safety.
+
+### Testing Strategy by Layer
+
+The testing strategy is organized by logical layers in the system. For `BorrowStrategy` subclasses, unit tests are written to confirm that each strategy enforces the correct rules for eligibility and loan duration. The `BorrowContext` class, which orchestrates strategy execution, is tested using behavioral tests with mocked strategies. This ensures that delegation is functioning correctly and that exceptions or edge cases are handled as expected.
+
+At the integration level, the `/borrow` API endpoint is tested using a backend test client to simulate full borrow workflows—from input to response—while ensuring backend logic and validations are integrated properly. On the frontend, form validation logic is manually verified using browser developer tools (e.g., Chrome DevTools), with a focus on real-time input validation and user feedback behavior.
+
+### Tools and Frameworks
+
+Testing is built on familiar and robust tooling. The backend makes use of `pytest` as the core testing framework, with `unittest.mock` providing support for mocking out database calls, external services, and strategy logic. For test data management and isolation, an in-memory SQLite database is used, allowing tests to run in a clean and disposable environment. This setup ensures database operations can be validated without relying on production-like data or persistent state. On the frontend, manual testing is performed using browser tools to inspect form-level validations and event-driven user feedback.
+
+### Sample Test Case
+
+Here's a concrete example that illustrates how business rules are enforced through testing. In the following test, a piece of equipment marked as already borrowed should raise an error when a user attempts to request it:
+```python
+def test_borrow_equipment_unavailable():
+    strategy = SimpleBorrowStrategy()
+    context = BorrowContext(strategy)
+    user = MockUser(role="student")
+    equipment = MockEquipment(status="borrowed")
+    with pytest.raises(EquipmentUnavailableError):
+        context.borrow(user, equipment)
+```
+This unit test ensures that the strategy and context work together correctly and that invalid borrowing attempts are blocked as expected.
+
+### Coverage and Maintainability
+
+The codebase emphasizes clarity and maintainability. Each module in the borrow system is kept under 100 lines and adheres to the single-responsibility principle, making it easier to test, debug, and evolve independently. All related tests are organized in `/borrow/test_borrow.py`, grouped by the class or function under test. Every borrow strategy has dedicated test coverage to verify not only expected use cases but also edge cases such as invalid roles, unavailable items, and loan duration limits. As a result, the borrow logic remains robust, flexible, and easy to extend or refactor as new rules emerge.
 
 ---
 
@@ -516,6 +545,7 @@ The “Borrow Equipment” use case is integrated within the main backend servic
 | 1.3     | 01.07.2025 | Aylin Barutçu        | Completed deployment instructions and setup notes       |
 | 1.4     | 01.07.2025 | Mehmet Karatekin     | Added Key Features and Functionality section            |
 | 1.5     | 01.07.2025 | Mehmet Karatekin     | Added Component Design section                          |
+| 1.6     | 02.07.2025 | Mehmet Karatekin     | Added design patterns and testability parts            |
 
 
 ---
