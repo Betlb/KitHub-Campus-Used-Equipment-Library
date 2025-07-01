@@ -265,9 +265,15 @@ Errors and warnings are recorded in a rotating log file to maintain traceability
 
 ---
 
-## Change Log -ilbey
+## Change Log 
 
-* v1.0 – Initial version with MVP use case.
+| Version | Date       | Author               | Change Description                                      |
+|---------|------------|----------------------|----------------------------------------------------------|
+| 1.0     | 28.06.2025 | All team members     | Initial draft of SDD created and reviewed               |
+| 1.1     | 29.06.2025 | İlBey Efe Taşabatlı  | Updated strategy pattern section and DFD diagram        |
+| 1.2     | 30.06.2025 | Mehmet Karatekin     | Added testability documentation and test files          |
+| 1.3     | 01.07.2025 | Aylin Barutçu        | Completed deployment instructions and setup notes       |
+
 
 ---
 
