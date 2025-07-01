@@ -90,8 +90,52 @@ This system does not integrate with any external services or university database
 
 ## Architectural Design -aylin
 
-* Outline overall architecture (e.g., client-server, MVC).
-* Provide diagrams if needed.
+# 1. System Architecture Diagram (High-Level)
+
+The architecture follows a **Layered (n-tier)** approach:
+
+- **Presentation Layer**: Reacts to user input, displays borrowing form, and renders feedback.
+- **Application Layer**: Contains the borrow controller and the strategy handler. It orchestrates the logic.
+- **Domain Layer**: Hosts the strategy pattern interface and its concrete implementations (e.g., `StandardBorrowStrategy`, `LabOnlyBorrowStrategy`).
+- **Data Access Layer**: Communicates with the database to store and retrieve item and borrow request information.
+- **Database Layer**: MySQL tables for `Users`, `Items`, `BorrowRequests`.
+
+> **Diagram location**:  
+> `/docs/UML-Diagrams/architecture-borrow-equipment-strategy.png`
+
+---
+
+# 2. Architectural Style
+
+**Pattern**: Layered Architecture
+
+**Justification**:
+
+- Clean separation of concerns.
+- Easy to test individual layers.
+- Aligns with modular design principle, useful when applying design patterns like Strategy.
+
+---
+
+# 3. Strategy Pattern Integration
+
+In the application layer, a `BorrowHandler` class is responsible for selecting the right borrowing rule at runtime:
+
+```python
+# Pseudocode
+strategy = get_strategy_for_user_and_item(user, item)
+if strategy.is_eligible(user, item):
+    proceed_with_borrow()
+else:
+    reject_borrow()
+```
+
+The `Strategy` interface supports pluggable policies such as:
+
+- **StandardBorrowStrategy**: Allows regular users to borrow standard items with default rules.
+- **RestrictedBorrowStrategy**: Applies tighter rules, for example, limiting access to high-value or sensitive items.
+- **MaxDurationBorrowStrategy**: Enforces a maximum borrowing duration depending on user or item type.
+
 
 ---
 
