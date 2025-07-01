@@ -541,11 +541,10 @@ The “Borrow Equipment” use case is integrated within the main backend servic
 |---------|------------|----------------------|----------------------------------------------------------|
 | 1.0     | 28.06.2025 | All team members     | Initial draft of SDD created and reviewed               |
 | 1.1     | 29.06.2025 | İlbey Efe Taşabatlı  | Updated strategy pattern section and DFD diagram        |
-| 1.2     | 30.06.2025 | Mehmet Karatekin     | Added testability documentation and test files          |
-| 1.3     | 01.07.2025 | Aylin Barutçu        | Completed deployment instructions and setup notes       |
-| 1.4     | 01.07.2025 | Mehmet Karatekin     | Added Key Features and Functionality section            |
-| 1.5     | 01.07.2025 | Mehmet Karatekin     | Added Component Design section                          |
-| 1.6     | 02.07.2025 | Mehmet Karatekin     | Added design patterns and testability parts            |
+| 1.2     | 01.07.2025 | Aylin Barutçu        | Completed deployment instructions and setup notes       |
+| 1.3     | 01.07.2025 | Mehmet Karatekin     | Added Key Features and Functionality section            |
+| 1.4     | 01.07.2025 | Mehmet Karatekin     | Added Component Design section                          |
+| 1.5     | 02.07.2025 | Mehmet Karatekin     | Added design patterns and testability parts            |
 
 
 ---
