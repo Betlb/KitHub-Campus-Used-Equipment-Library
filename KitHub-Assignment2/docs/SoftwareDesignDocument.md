@@ -344,10 +344,64 @@ Errors and warnings are recorded in a rotating log file to maintain traceability
 
 ---
 
-## Deployment and Installation Design -aylin
+## Deployment and Installation Design
 
-* Local deployment instructions.
-* Suggested hosting platforms (e.g., Heroku, university server).
+The system is deployed as a web-based application hosted on a local or cloud server.  
+The “Borrow Equipment” use case is integrated within the main backend service and available under the `/borrow` API route.
+
+---
+
+## 1. Environment Configuration
+
+| Component     | Configuration                                 |
+|---------------|-----------------------------------------------|
+| **Backend**   | Python 3.11, Flask, MySQL                     |
+| **Frontend**  | HTML5, CSS3, JavaScript                       |
+| **Database**  | MySQL 8.x (initial local setup via SQLite)   |
+| **OS Support**| Cross-platform: Windows, macOS, Linux        |
+
+---
+
+## 2. Installation Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YourTeam/KitHub.git
+   cd KitHub
+2. **Create virtual environment**
+   ```bash
+   python3 -m venv env
+   source env/bin/activate  # On Windows: .\env\Scripts\activate
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+
+4. **Run database migration (for SQLite testing)**
+   ```bash
+   python scripts/init_db.py
+
+5. **Run the application**
+   ```bash
+   flask run
+
+---
+
+## 3. Packaging & Structure
+
+| Folder           | Purpose                                       |
+|------------------|-----------------------------------------------|
+| `/src/borrow/`   | Borrow logic using Strategy pattern           |
+| `/tests/borrow/` | Tests for the borrow logic                    |
+| `/docs/`         | Diagrams, UI mockups, and documentation       |
+
+---
+
+## 4. Future Hosting Options
+
+- **GitHub Pages** (Frontend only)  
+- **Render / Heroku** (Full stack deployment)  
+- **Docker-based deployment** with `Dockerfile` (planned)
 
 ---
 
