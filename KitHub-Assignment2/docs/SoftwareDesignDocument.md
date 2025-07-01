@@ -521,7 +521,7 @@ The “Borrow Equipment” use case is integrated within the main backend servic
 |------------------------------|-----------------------------------------------------|-----------------------|
 | System Overview              | Project introduction and use case context           | Aylin Barutçu         |
 | System Context + UML Diagram | Use case boundary and actor diagram                 | İlbey Efe Taşabatlı   |
-| Key Features & Functionality | Explanation of how system meets use case goals      | Betül Biçer           |
+| Key Features & Functionality | Explanation of how system meets use case goals      | Mehmet Karatekin      |
 | Component Design + Diagram   | Subsystems, responsibilities and visuals            | Mehmet Karatekin      |
 | Data Design + ER & DFD       | Entity modeling, DFD creation                       | İlbey Efe Taşabatlı   |
 | Design Pattern Integration   | Strategy pattern logic, context, and usage          | Aylin Barutçu         |
