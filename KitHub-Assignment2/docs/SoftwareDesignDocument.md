@@ -102,10 +102,36 @@ This system does not integrate with any external services or university database
 
 ---
 
-## Data Design -hepimiz
+## Data Design
 
-* Outline database schema, data models.
-* Mention normalization, relationships, key fields.
+## Data Model / ER Diagram
+
+The system uses a relational database to manage users, equipment, and borrow transactions. The key entities involved in the **"Borrow Equipment"** use case are:
+
+- **User** (`UserID`, `Name`, `Email`, `Password`, `Role`)
+- **Equipment** (`EquipmentID`, `Name`, `Category`, `Status`)
+- **BorrowRequest** (`RequestID`, `UserID`, `EquipmentID`, `StartDate`, `EndDate`, `Status`, `Notes`)
+    ![](ERDiagram.png)
+  
+## Data Storage (Database or File Structure)
+
+The data is stored in a **MySQL database**. Table definitions:
+
+- **Users Table**: Stores user credentials and roles (student/admin).
+- **Equipment Table**: Stores equipment metadata and availability status.
+- **BorrowRequests Table**: Tracks each borrow request including time range and approval status.
+
+## Data Flow Diagrams (DFDs)
+
+### Level 1 DFD – Borrow Equipment Use Case
+ ![](DFD.png)
+
+## Data Validation Rules
+
+- User input validation for email format, date ranges, and required fields.
+- Equipment availability is checked before request is submitted.
+- Admin approval must change the borrow request’s status from **“pending”** to **“approved”** or **“rejected”**.
+
 
 ---
 
