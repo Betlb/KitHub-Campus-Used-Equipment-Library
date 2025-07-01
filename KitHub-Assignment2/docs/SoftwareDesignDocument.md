@@ -88,7 +88,7 @@ This system does not integrate with any external services or university database
   A set of strategy classes define the rules for different borrowing policies (e.g., max borrow length, eligibility, item restrictions).
 
 
-## Architectural Design -aylin
+## Architectural Design
 
 # 1. System Architecture Diagram (High-Level)
 
