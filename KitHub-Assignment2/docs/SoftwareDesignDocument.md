@@ -163,13 +163,6 @@ A wireframe showing the interaction from catalog → detail → borrow form → 
 - **Accessibility:** High contrast text and large buttons for usability on mobile and desktop.  
 - **Responsive Design:** Mobile, tablet, and desktop compatibility.
 
-## Task Matrix Entry
-
-| Task                      | Description                                     | Responsible Member |
-|---------------------------|-------------------------------------------------|---------------------|
-| Wireframe & UI Flow Design | Designed user flow for borrow request pages     | Betül Biçer         |
-| UI Documentation           | Wrote descriptions of user interface steps      | Betül Biçer         |
-
 
 ## External Interfaces -ilbey
 
@@ -212,8 +205,19 @@ A wireframe showing the interaction from catalog → detail → borrow form → 
 
 ---
 
-## Future Work / Open Issues -betül
+## Future Work / Open Issues
 
-* Add equipment return functionality.
-* Notifications for overdue items.
-* Mobile support.
+## Known Open Issues
+
+- No real-time inventory locking mechanism; may cause race conditions in concurrent borrow attempts.
+- Lack of automated notifications (email/SMS); only internal alerts exist in current build.
+- Minimal error feedback in UI (e.g., no toast messages, no modal confirmations).
+
+## Potential Enhancements
+
+- Integration with university SSO systems (e.g., OAuth2)
+- RFID/QR inventory scanning
+- Return item damage reports
+- Mobile-responsive UI improvements
+- Admin analytics panel for borrow trends and stock usage
+
