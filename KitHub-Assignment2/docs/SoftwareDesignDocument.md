@@ -190,6 +190,8 @@ The interaction flow between components is both logical and decoupled. The `Borr
 
 This modular setup ensures high cohesion within each component and low coupling between components. As a result, the system remains maintainable, extensible, and testable—ideal for scaling or integrating new features in the future.
 
+![](borrow-component-diagram.png)
+
 ---
 
 ## Data Design
