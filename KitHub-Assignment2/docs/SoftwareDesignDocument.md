@@ -189,6 +189,7 @@ Data operations are handled by the `BorrowRepository`, which executes the SQL qu
 The interaction flow between components is both logical and decoupled. The `BorrowController` communicates directly with the `BorrowService`, which in turn interacts with multiple subsystems: the selected `BorrowStrategy` for rule validation, the `BorrowRepository` for database operations, and the `NotificationService` for user updates.
 
 This modular setup ensures high cohesion within each component and low coupling between components. As a result, the system remains maintainable, extensible, and testable—ideal for scaling or integrating new features in the future.
+
 ---
 
 ## Data Design
