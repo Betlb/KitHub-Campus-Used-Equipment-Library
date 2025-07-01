@@ -44,12 +44,48 @@ This system does not integrate with any external services or university database
 
 ---
 
-## Assumptions and Dependencies
-
-* List any assumptions (e.g., user always authenticates).
-* Describe dependencies such as frameworks, services, or libraries.
+## Key Features and Functionality
 
 ---
+
+## Assumptions and Dependencies
+
+### Assumptions
+
+- **User Authentication Is Required**  
+  It is assumed that users must be authenticated (i.e., logged in) before they can initiate a borrow request.
+
+- **Only Available Items Can Be Borrowed**  
+  The borrow operation only applies to items marked as available. Unavailable or already borrowed items are filtered out automatically.
+
+- **Borrow Strategy Is Selected Based on Item Type or Policy**  
+  The appropriate borrow rule strategy (e.g., `MaxDurationStrategy`, `RestrictedAccessStrategy`) is selected at runtime based on the item's category or institutional rules.
+
+- **Admin Approval Is Always Required**  
+  Every borrow request goes through a manual approval by an administrator. The system does not automatically grant borrow permissions.
+
+- **Single Borrow per User per Item**  
+  A user cannot borrow multiple instances of the same item simultaneously.
+
+- **Time Slots and Conflicts Are Pre-validated**  
+  Borrow time inputs from users are assumed to be validated against the existing booking records.
+
+---
+
+### Dependencies
+
+- **Authentication Service**  
+  Used to verify user identity and role before processing borrow logic.
+
+- **Inventory Management Module**  
+  Supplies item availability data and updates item status post-approval or rejection.
+
+- **Notification System**  
+  Sends status updates to both students and admins regarding the borrow request.
+
+- **Borrow Strategy Interface and Implementations**  
+  A set of strategy classes define the rules for different borrowing policies (e.g., max borrow length, eligibility, item restrictions).
+
 
 ## Architectural Design
 
