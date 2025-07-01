@@ -190,10 +190,27 @@ A wireframe showing the interaction from catalog → detail → borrow form → 
 - **Responsive Design:** Mobile, tablet, and desktop compatibility.
 
 
-## External Interfaces -ilbey
+## External Interfaces
+In the current MVP implementation of **KitHub**, the "Borrow Equipment" use case does not depend on real-time interaction with third-party systems. However, the architecture is designed to support external integration in future versions.
 
-* None for MVP.
-* Future: LDAP, university database, email services.
+## Current Status
+
+- No active external interfaces in MVP.  
+- All logic and data processing are handled internally through the backend service and MySQL database.
+
+## Future Integration Possibilities
+
+| Interface Type            | Description                                                              |
+|---------------------------|---------------------------------------------------------------------------|
+| University Login API      | OAuth2-based SSO integration for student identity verification.           |
+| RFID/QR Tracking System   | External inventory tools to scan and validate equipment movements.        |
+| Email Gateway (SMTP API)  | External service for sending borrow confirmation and reminders.           |
+
+These integrations are not implemented yet but were considered in the architectural decisions (such as modular REST endpoints and `NotificationService` separation).
+
+## Design Implication
+
+Thanks to the layered architecture, any of the above systems can be connected in the **Application Layer** or via **service injection**, without modifying existing controller logic or database schema.
 
 ---
 
