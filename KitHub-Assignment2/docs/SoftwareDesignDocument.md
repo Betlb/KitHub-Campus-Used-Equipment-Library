@@ -186,10 +186,52 @@ The data is stored in a **MySQL database**. Table definitions:
 
 ---
 
-## Implementation Notes -aylin
+## Implementation Notes
 
-* Languages used (e.g., JavaScript, Python).
-* Frameworks or constraints to consider.
+The "Borrow Equipment" use case was implemented using modular, testable Python components.  
+The **Strategy Design Pattern** was applied to abstract borrow rules, and the architecture followed the layered model described earlier.  
+All logic was integrated under the `/src/borrow/` module and is traceable via commit history.
+
+---
+
+## File Breakdown
+
+| File Name            | Description                                                                 |
+|----------------------|-----------------------------------------------------------------------------|
+| `borrow_strategy.py` | Contains `BorrowStrategy` base class and all specific strategy implementations. |
+| `borrow_context.py`  | Context class that accepts a strategy and executes borrowing logic.         |
+| `borrow_controller.py` | Handles requests from the UI, chooses appropriate strategy, and creates borrow records. |
+| `models.py`          | Defines `User`, `Equipment`, and `LoanRecord` data models.                  |
+| `test_borrow.py`     | Unit tests for all strategy implementations.                                |
+
+---
+
+## Key Technologies Used
+
+- **Backend**: Python 3.x  
+- **Pattern Framework**: Pure Python, object-oriented implementation  
+- **Data Handling**: SQLite for mock local testing (replaced by MySQL in production)  
+- **Testing**: `pytest` for unit testing  
+- **Version Control**: GitHub commits traceable to contributors  
+- **Coding Standards**: PEP8-compliant with docstrings for all public classes and methods  
+
+---
+
+## Reusability & Extensibility
+
+- New borrow rules (e.g., faculty, event-specific loans) can be added simply by implementing a new `BorrowStrategy` subclass.
+- The borrow logic is reusable across both the student and admin panels, decoupled from UI concerns.
+
+---
+
+## GitHub Traceability
+
+- Commits include `[Pattern: Strategy]` tags in messages.
+- Strategy pattern applied in commits by **Mehmet Karatekin**.
+- Documentation commits handled by **Aylin Barutçu**.
+- All code organized inside `/src/borrow/` and `/tests/`.
+
+
 
 ---
 
