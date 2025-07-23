@@ -162,4 +162,33 @@
     }
   }
   
-  
+  .filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.filter-bar h2 {
+  margin: 0;
+  flex: 1;
+}
+
+.filter-bar form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-bar input[type="text"] {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.filter-bar .button {
+  white-space: nowrap;
+}
