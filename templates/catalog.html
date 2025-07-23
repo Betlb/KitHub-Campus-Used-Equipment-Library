@@ -1,14 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
 <h2>Available Equipment</h2>
-<ul>
+<div class="catalog-grid">
   {% for item in items %}
-    <li>
-      {{ item.name }} - {{ item.status }}
-      {% if item.status == 'available' %}
-        <a href="{{ url_for('borrow.borrow_form', item_id=item.id) }}">Borrow</a>
-      {% endif %}
-    </li>
+  <div class="equipment-card">
+    <h3>{{ item.name }}</h3>
+    <div class="status {{ item.status }}">{{ item.status.capitalize() }}</div>
+    {% if item.status == 'available' %}
+    <a href="{{ url_for('borrow.borrow_form', item_id=item.id) }}" class="button">Borrow</a>
+    {% else %}
+    <p><em>Currently unavailable</em></p>
+    {% endif %}
+  </div>
   {% endfor %}
-</ul>
+</div>
 {% endblock %}

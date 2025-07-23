@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="home-hero">
+  <div class="hero-text">
+    <h2>Welcome to KitHub</h2>
+    <p>Borrow lab tools, cameras, and more — right from campus. Save money. Save resources.</p>
+    <a href="{{ url_for('borrow.catalog') }}" class="button">Browse Equipment</a>
+  </div>
+  <div class="hero-img">
+    <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="Book Icon" />
+  </div>
+</section>
+{% endblock %}
