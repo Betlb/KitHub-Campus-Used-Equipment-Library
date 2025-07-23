@@ -40,7 +40,7 @@ This system does not integrate with any external services or university database
 - Backend logic invokes appropriate borrowing strategy.
 - Database stores/updates state of requests and items.
 
-![](media/context-diagram.png)
+![](../media/context-diagram.png)
 
 ---
 
@@ -187,7 +187,7 @@ The interaction flow between components is both logical and decoupled. The `Borr
 
 This modular setup ensures high cohesion within each component and low coupling between components. As a result, the system remains maintainable, extensible, and testable—ideal for scaling or integrating new features in the future.
 
-![](media/borrow-component-diagram.png)
+![](../media/borrow-component-diagram.png)
 
 ---
 
@@ -200,7 +200,7 @@ The system uses a relational database to manage users, equipment, and borrow tra
 - **User** (`UserID`, `Name`, `Email`, `Password`, `Role`)
 - **Equipment** (`EquipmentID`, `Name`, `Category`, `Status`)
 - **BorrowRequest** (`RequestID`, `UserID`, `EquipmentID`, `StartDate`, `EndDate`, `Status`, `Notes`)
-    ![](media/ERDiagram.png)
+    ![](../media/ERDiagram.png)
   
 ## Data Storage (Database or File Structure)
 
@@ -213,7 +213,7 @@ The data is stored in a **MySQL database**. Table definitions:
 ## Data Flow Diagrams (DFDs)
 
 ### Level 1 DFD – Borrow Equipment Use Case
- ![](media/DFD.png)
+ ![](../media/DFD.png)
 
 ## Data Validation Rules
 
@@ -332,7 +332,7 @@ This section describes the primary UI components supporting the **"Borrow Equipm
 
 ## UI Mockup
 A wireframe showing the interaction from catalog → detail → borrow form → confirmation has been generated.
-![](media/borrow-request-flow-wireframe.png)
+![](../media/borrow-request-flow-wireframe.png)
 
 ## Design Principles Followed
 
