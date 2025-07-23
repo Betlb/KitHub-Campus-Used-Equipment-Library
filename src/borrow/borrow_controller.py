@@ -5,21 +5,16 @@ from .models import User, Equipment
 
 borrow_bp = Blueprint('borrow', __name__)
 
-# Mock database
-items = [
-    Equipment(1, "Camera", "media", "available"),
-    Equipment(2, "Oscilloscope", "lab", "borrowed"),
-]
-
 @borrow_bp.route('/catalog')
 def catalog():
+    items = Equipment.query.all()
     return render_template('catalog.html', items=items)
 
 @borrow_bp.route('/borrow/<int:item_id>', methods=['GET', 'POST'])
 def borrow_form(item_id):
-    item = next((i for i in items if i.id == item_id), None)
+    item = Equipment.query.get(item_id)
     if request.method == 'POST':
-        user = User(1, "Alice", "student")
+        user = User.query.get(1)
         strategy = StandardBorrowStrategy()
         context = BorrowContext(strategy)
         try:

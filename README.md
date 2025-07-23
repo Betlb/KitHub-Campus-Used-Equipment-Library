@@ -9,5 +9,6 @@ This project uses Python 3.11.9
 ```bash
   cd KitHub-Campus-Used-Equipment-Library
   pip install -r requirements.txt
+  python ./scripts/init_db.py
   python app.py
 ```
