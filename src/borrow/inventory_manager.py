@@ -1,4 +1,3 @@
-# src/borrow/inventory_manager.py
 from .observer import Subject, Observer
 from .db import db
 from .models import Equipment
@@ -15,7 +14,7 @@ class InventoryManager(Subject):
         db.session.add(new_equipment)
         db.session.commit()
         print(f"INVENTORY_MANAGER: Added '{name}' to inventory.")
-        # Notify observers about the 'add' event
+        
         self.notify(event="EQUIPMENT_ADDED", data=new_equipment)
         return new_equipment
 
@@ -28,7 +27,7 @@ class InventoryManager(Subject):
         equipment.status = new_status
         db.session.commit()
         print(f"INVENTORY_MANAGER: Updated status for '{equipment.name}' to '{new_status}'.")
-        # Notify observers about the 'update' event
+        
         self.notify(event="STATUS_UPDATED", data=equipment)
         return equipment
 

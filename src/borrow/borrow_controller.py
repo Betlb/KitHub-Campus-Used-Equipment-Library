@@ -5,8 +5,8 @@ from .borrow_strategy import StandardBorrowStrategy
 from .models import Equipment, User, BorrowRequest
 from datetime import datetime, timedelta
 from .db import db
+from .borrow_strategy import get_strategy_for_user
 
-# Decorator Search sınıflarını import et
 from .equipment_search.base import BaseEquipmentSearch
 from .equipment_search.search_filter import SearchFilterDecorator
 from .equipment_search.availability_filter import AvailabilityFilterDecorator
@@ -18,18 +18,16 @@ borrow_bp = Blueprint('borrow', __name__)
 def catalog():
     search_strategy = BaseEquipmentSearch()
 
-    # Arama kutusu (isim)
     search_term = request.args.get('search', '').strip()
     if search_term:
         search_strategy = SearchFilterDecorator(search_strategy, search_term)
 
-    # Kategori filtresi
+
     category = request.args.get('category', '').strip()
     if category:
         search_strategy = CategoryFilterDecorator(search_strategy, category)
 
 
-    # Her zaman sadece available filtrele
     search_strategy = AvailabilityFilterDecorator(search_strategy)
 
     items = search_strategy.search().all()
@@ -41,13 +39,12 @@ def catalog():
 def borrow_form(item_id):
     item = Equipment.query.get_or_404(item_id)
     if request.method == 'POST':
-        user = User.query.get(1)  # mock login
-        strategy = StandardBorrowStrategy()
+        user = User.query.get(1) 
+        strategy = get_strategy_for_user(user)
         context = BorrowContext(strategy)
         try:
             context.borrow(user, item)
 
-            # ✅ Store BorrowRequest in DB
             borrow_request = BorrowRequest(
                 user_id=user.id,
                 equipment_id=item.id,

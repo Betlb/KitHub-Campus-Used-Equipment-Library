@@ -1,4 +1,4 @@
-from ..borrow.models import StudentUser, AdminUser   # noktalı dizin = src.auth içindeyiz
+from ..borrow.models import StudentUser, AdminUser 
 
 class UserFactory:
     @staticmethod

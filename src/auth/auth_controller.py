@@ -11,7 +11,7 @@ auth_bp = Blueprint("auth", __name__, template_folder="../../templates")
 def register():
     if request.method == "POST":
         name     = request.form["name"]
-        role     = request.form["role"]          # radio / select
+        role     = request.form["role"]        
         password = request.form["password"]
 
         if User.query.filter_by(name=name).first():
@@ -20,7 +20,7 @@ def register():
         user = UserFactory.create_user(role, name, password)
         db.session.add(user)
         db.session.commit()
-        login_user(user)                         # oto‑login
+        login_user(user)                         # login
         return redirect(url_for("borrow.catalog"))
 
     return render_template("register.html")

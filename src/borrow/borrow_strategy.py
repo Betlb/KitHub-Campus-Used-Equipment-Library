@@ -11,3 +11,15 @@ class StandardBorrowStrategy(BorrowStrategy):
 
     def get_max_duration(self):
         return 7
+
+class ClubBorrowStrategy(BorrowStrategy):
+    def is_eligible(self, user, equipment):
+        return equipment.status == 'available' and user.role == 'club'
+
+    def get_max_duration(self):
+        return 14
+
+def get_strategy_for_user(user):
+    if user.role == 'club':
+        return ClubBorrowStrategy()
+    return StandardBorrowStrategy()

@@ -11,16 +11,15 @@ inventory_manager = InventoryManager()
 inventory_manager.attach(LoggingObserver())
 inventory_manager.attach(NotificationObserver())
 
-# --- Admin Homepage Route (no change) ---
+# --- Admin Homepage Route  ---
 @admin_bp.route('/home')
 def home():
-    # ... (code is the same)
     equipment_count = Equipment.query.count()
     user_count = User.query.count()
     available_items = Equipment.query.filter_by(status='available').count()
     return render_template('admin_home.html', equipment_count=equipment_count, user_count=user_count, available_items=available_items)
 
-# --- Inventory Route (MODIFIED) ---
+# --- Inventory Route  ---
 @admin_bp.route('/inventory')
 def inventory_list():
     """Displays all equipment and finds any pending offers."""
@@ -54,17 +53,15 @@ def reject_offer(request_id):
     """Rejects a borrow request."""
     borrow_request = BorrowRequest.query.get_or_404(request_id)
     
-    # Change request status. Equipment status remains 'available'.
     borrow_request.status = 'rejected'
     
     db.session.commit()
     flash(f'Offer for "{borrow_request.equipment.name}" has been rejected.', 'danger')
     return redirect(url_for('admin.inventory_list'))
 
-# --- Existing Inventory Management Routes (no change) ---
+# --- Existing Inventory Management Routes ---
 @admin_bp.route('/inventory/add', methods=['POST'])
 def add_equipment():
-    # ... (code is the same)
     name = request.form.get('name')
     category = request.form.get('category')
     inventory_manager.add_equipment(name, category)
@@ -73,7 +70,6 @@ def add_equipment():
 
 @admin_bp.route('/inventory/update-status/<int:item_id>', methods=['POST'])
 def update_status(item_id):
-    # ... (code is the same)
     new_status = request.form.get('status')
     inventory_manager.update_equipment_status(item_id, new_status)
     flash('Equipment status updated successfully.', 'success')

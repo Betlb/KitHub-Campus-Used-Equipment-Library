@@ -1,4 +1,3 @@
-# src/borrow/equipment_search/category_filter.py
 from ..models import Equipment
 from .base import EquipmentSearch
 

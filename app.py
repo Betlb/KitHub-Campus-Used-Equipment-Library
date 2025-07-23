@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for      # ← redirect & url_for eklendi
+from flask import Flask, render_template, redirect, url_for   
 from flask_login import LoginManager, current_user
 from src.borrow.db import db
 from src.borrow.borrow_controller import borrow_bp
@@ -26,7 +26,7 @@ def load_user(user_id):
 
 # Blueprints
 app.register_blueprint(borrow_bp)
-app.register_blueprint(auth_bp)                          # NEW
+app.register_blueprint(auth_bp)                         
 
 @app.route('/')
 def home():
