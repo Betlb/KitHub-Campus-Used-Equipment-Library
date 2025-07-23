@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Available Equipment</h2>
+<ul>
+  {% for item in items %}
+    <li>
+      {{ item.name }} - {{ item.status }}
+      {% if item.status == 'available' %}
+        <a href="{{ url_for('borrow.borrow_form', item_id=item.id) }}">Borrow</a>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
