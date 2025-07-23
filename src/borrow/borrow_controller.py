@@ -4,18 +4,42 @@ from .borrow_context import BorrowContext
 from .borrow_strategy import StandardBorrowStrategy
 from .models import Equipment
 
+# Decorator Search sınıflarını import et
+from .equipment_search.base import BaseEquipmentSearch
+from .equipment_search.search_filter import SearchFilterDecorator
+from .equipment_search.availability_filter import AvailabilityFilterDecorator
+from .equipment_search.category_filter import CategoryFilterDecorator
+
 borrow_bp = Blueprint('borrow', __name__)
 
 @borrow_bp.route('/catalog')
 def catalog():
-    items = Equipment.query.all()
+    search_strategy = BaseEquipmentSearch()
+
+    # Arama kutusu (isim)
+    search_term = request.args.get('search', '').strip()
+    if search_term:
+        search_strategy = SearchFilterDecorator(search_strategy, search_term)
+
+    # Kategori filtresi
+    category = request.args.get('category', '').strip()
+    if category:
+        search_strategy = CategoryFilterDecorator(search_strategy, category)
+
+
+    # Her zaman sadece available filtrele
+    search_strategy = AvailabilityFilterDecorator(search_strategy)
+
+    items = search_strategy.search().all()
     return render_template('catalog.html', items=items)
+
 
 @borrow_bp.route('/borrow/<int:item_id>', methods=['GET', 'POST'])
 @login_required
 def borrow_form(item_id):
     item = Equipment.query.get_or_404(item_id)
     if request.method == 'POST':
+        user = User.query.get(1)  # Örnek kullanıcı
         strategy = StandardBorrowStrategy()
         context = BorrowContext(strategy)
         try:

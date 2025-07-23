@@ -1,10 +1,33 @@
 {% extends "layout.html" %}
 {% block content %}
-<h2>Available Equipment</h2>
+<div class="filter-bar">
+  <h2>Available Equipment</h2>
+  <form method="get" action="{{ url_for('borrow.catalog') }}">
+    <input
+      type="text"
+      name="search"
+      placeholder="name..."
+      value="{{ request.args.get('search', '') }}"
+    >
+    <input
+      type="text"
+      name="category"
+      placeholder="Category..."
+      value="{{ request.args.get('category', '') }}"
+    >
+    <button type="submit" class="button">Filter</button>
+  </form>
+</div>
+
+
 <div class="catalog-grid">
   {% for item in items %}
   <div class="equipment-card">
     <h3>{{ item.name }}</h3>
+    <p><strong>Category:</strong> {{ item.category }}</p>
+    {% if item.location %}
+    <p><strong>Location:</strong> {{ item.location }}</p>
+    {% endif %}
     <div class="status {{ item.status }}">{{ item.status.capitalize() }}</div>
     {% if item.status == 'available' %}
     <a href="{{ url_for('borrow.borrow_form', item_id=item.id) }}" class="button">Borrow</a>
