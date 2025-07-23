@@ -1,0 +1,165 @@
+/* Reset & base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  
+  /* Header */
+  header {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 15px 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  header h1 {
+    font-size: 1.8em;
+  }
+  
+  /* Catalog Grid */
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Equipment Card */
+  .equipment-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: 0.3s;
+  }
+  
+  .equipment-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .equipment-card h3 {
+    margin-bottom: 10px;
+  }
+  
+  .equipment-card .status {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 0.85em;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .status.available {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+  }
+  
+  .status.borrowed {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+  }
+  
+  /* Buttons */
+  .button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  /* Form & confirmation */
+  form {
+    max-width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  }
+  
+  form button {
+    margin-top: 10px;
+  }
+  
+  .confirmation {
+    background: #e0f2fe;
+    padding: 20px;
+    border-left: 5px solid #0284c7;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+
+  /* Hero Section */
+.home-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+  }
+  
+  .hero-text {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .hero-text h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .hero-text p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  .hero-img {
+    flex: 1;
+    text-align: right;
+    min-width: 200px;
+  }
+  
+  .hero-img img {
+    max-width: 180px;
+    height: auto;
+    opacity: 0.9;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .home-hero {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .hero-img {
+      text-align: center;
+      margin-top: 20px;
+    }
+  }
+  
+  
