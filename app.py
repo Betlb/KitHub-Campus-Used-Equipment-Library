@@ -1,20 +1,38 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for      # ← redirect & url_for eklendi
+from flask_login import LoginManager, current_user
 from src.borrow.db import db
 from src.borrow.borrow_controller import borrow_bp
+from src.auth.auth_controller import auth_bp
+from src.borrow.models import User
+
 
 app = Flask(__name__)
 app.secret_key = 'KitHub'
 
-# Config
+# DB config
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///kithub.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db.init_app(app)
+
+# ---- Flask‑Login ----
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+# ---------------------
+
+# Blueprints
 app.register_blueprint(borrow_bp)
+app.register_blueprint(auth_bp)                          # NEW
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    if current_user.is_authenticated:
+        return redirect(url_for('borrow.catalog'))
+    return redirect(url_for('auth.login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
