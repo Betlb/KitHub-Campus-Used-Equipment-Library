@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="admin-container">
+    <h2>Admin: Manage Inventory</h2>
+
+    <!-- Flash messages will use existing styles -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('admin.add_equipment') }}" method="post" style="margin-bottom: 30px;">
+        <h3 style="margin-bottom: 15px;">Add New Equipment</h3>
+        <input type="text" name="name" placeholder="Equipment Name" required style="display: block; width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        <input type="text" name="category" placeholder="Category (e.g., Laptop)" required style="display: block; width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        <button type="submit" class="button">Add Equipment</button>
+    </form>
+
+
+    <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.1);">
+        <h3 style="margin-bottom: 15px;">Current Inventory</h3>
+        
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="border-bottom: 2px solid #f2f2f2;">
+                    <th style="text-align: left; padding: 12px 8px;">ID</th>
+                    <th style="text-align: left; padding: 12px 8px;">Name</th>
+                    <th style="text-align: left; padding: 12px 8px;">Category</th>
+                    <th style="text-align: left; padding: 12px 8px;">Status</th>
+                    <th style="text-align: left; padding: 12px 8px;">Action</th>
+                    <th style="text-align: left; padding: 12px 8px;">Offers</th> <!-- NEW COLUMN HEADER -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr style="border-bottom: 1px solid #f2f2f2;">
+                    <td style="padding: 12px 8px;">{{ item.id }}</td>
+                    <td style="padding: 12px 8px;">{{ item.name }}</td>
+                    <td style="padding: 12px 8px;">{{ item.category }}</td>
+                    <td style="padding: 12px 8px;">
+                        <span class="status {{ item.status }}">{{ item.status.capitalize() }}</span>
+                    </td>
+                    <td style="padding: 12px 8px;">
+                        <form class="form-inline" action="{{ url_for('admin.update_status', item_id=item.id) }}" method="post">
+                            <select name="status" style="padding: 6px; border-radius: 5px; border: 1px solid #ccc;">
+                                <option value="available" {% if item.status == 'available' %}selected{% endif %}>Available</option>
+                                <option value="maintenance" {% if item.status == 'maintenance' %}selected{% endif %}>Maintenance</option>
+                            </select>
+                            <button type="submit" class="button" style="margin-left: 5px;">Update</button>
+                        </form>
+                    </td>
+                    <!-- NEW COLUMN CONTENT -->
+                    <td style="padding: 12px 8px;">
+                        {# Check if this item's ID is in our offers dictionary #}
+                        {% if item.id in offers %}
+                            <div style="display: flex; gap: 5px;">
+                                <!-- Accept Button -->
+                                <form action="{{ url_for('admin.accept_offer', request_id=offers[item.id].id) }}" method="post">
+                                    <button type="submit" class="button" style="background-color: #166534;">Accept</button>
+                                </form>
+                                <!-- Reject Button -->
+                                <form action="{{ url_for('admin.reject_offer', request_id=offers[item.id].id) }}" method="post">
+                                    <button type="submit" class="button" style="background-color: #991b1b;">Reject</button>
+                                </form>
+                            </div>
+                        {% else %}
+                            <span style="color: #6b7280;">No offers</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ url_for('admin.home') }}" class="button" style="margin-top: 20px;">Back to Admin Dashboard</a>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+# src/borrow/admin_controller.py
+
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from .models import Equipment, User, BorrowRequest  # <-- Import BorrowRequest
+from .db import db  # <-- Import db to make changes
+from .inventory_manager import InventoryManager, LoggingObserver, NotificationObserver
+
+admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
+
+inventory_manager = InventoryManager()
+inventory_manager.attach(LoggingObserver())
+inventory_manager.attach(NotificationObserver())
+
+# --- Admin Homepage Route (no change) ---
+@admin_bp.route('/home')
+def home():
+    # ... (code is the same)
+    equipment_count = Equipment.query.count()
+    user_count = User.query.count()
+    available_items = Equipment.query.filter_by(status='available').count()
+    return render_template('admin_home.html', equipment_count=equipment_count, user_count=user_count, available_items=available_items)
+
+# --- Inventory Route (MODIFIED) ---
+@admin_bp.route('/inventory')
+def inventory_list():
+    """Displays all equipment and finds any pending offers."""
+    items = Equipment.query.order_by(Equipment.id).all()
+    
+    # Find all pending borrow requests
+    pending_offers = BorrowRequest.query.filter_by(status='pending').all()
+    
+    # Create a dictionary for easy lookup in the template: {equipment_id: request_object}
+    offers_map = {offer.equipment_id: offer for offer in pending_offers}
+    
+    return render_template('inventory.html', items=items, offers=offers_map)
+
+# --- NEW: Routes for Handling Offers ---
+@admin_bp.route('/offer/accept/<int:request_id>', methods=['POST'])
+def accept_offer(request_id):
+    """Accepts a borrow request."""
+    borrow_request = BorrowRequest.query.get_or_404(request_id)
+    
+    # Change request and equipment status
+    borrow_request.status = 'approved'
+    borrow_request.equipment.status = 'borrowed' # <-- Now the item is borrowed
+    
+    db.session.commit()
+    flash(f'Offer for "{borrow_request.equipment.name}" has been accepted.', 'success')
+    return redirect(url_for('admin.inventory_list'))
+
+
+@admin_bp.route('/offer/reject/<int:request_id>', methods=['POST'])
+def reject_offer(request_id):
+    """Rejects a borrow request."""
+    borrow_request = BorrowRequest.query.get_or_404(request_id)
+    
+    # Change request status. Equipment status remains 'available'.
+    borrow_request.status = 'rejected'
+    
+    db.session.commit()
+    flash(f'Offer for "{borrow_request.equipment.name}" has been rejected.', 'danger')
+    return redirect(url_for('admin.inventory_list'))
+
+# --- Existing Inventory Management Routes (no change) ---
+@admin_bp.route('/inventory/add', methods=['POST'])
+def add_equipment():
+    # ... (code is the same)
+    name = request.form.get('name')
+    category = request.form.get('category')
+    inventory_manager.add_equipment(name, category)
+    flash(f"Successfully added '{name}' to the inventory.", 'success')
+    return redirect(url_for('admin.inventory_list'))
+
+@admin_bp.route('/inventory/update-status/<int:item_id>', methods=['POST'])
+def update_status(item_id):
+    # ... (code is the same)
+    new_status = request.form.get('status')
+    inventory_manager.update_equipment_status(item_id, new_status)
+    flash('Equipment status updated successfully.', 'success')
+    return redirect(url_for('admin.inventory_list'))
