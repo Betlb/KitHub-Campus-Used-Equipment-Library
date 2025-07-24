@@ -22,4 +22,7 @@ class ClubBorrowStrategy(BorrowStrategy):
 def get_strategy_for_user(user):
     if user.role == 'club':
         return ClubBorrowStrategy()
-    return StandardBorrowStrategy()
+    elif user.role == 'student':
+        return StandardBorrowStrategy()
+    else:
+        raise Exception("Borrowing not supported for this user role.")
