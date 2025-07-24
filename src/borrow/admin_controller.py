@@ -1,6 +1,6 @@
-# src/borrow/admin_controller.py
-
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from flask_login import current_user, login_required
+from functools import wraps
 from .models import Equipment, User, BorrowRequest  # <-- Import BorrowRequest
 from .db import db  # <-- Import db to make changes
 from .inventory_manager import InventoryManager, LoggingObserver, NotificationObserver
@@ -11,8 +11,18 @@ inventory_manager = InventoryManager()
 inventory_manager.attach(LoggingObserver())
 inventory_manager.attach(NotificationObserver())
 
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_authenticated or current_user.role != 'admin':
+            abort(403)
+        return f(*args, **kwargs)
+    return decorated_function
+
 # --- Admin Homepage Route  ---
 @admin_bp.route('/home')
+@login_required
+@admin_required
 def home():
     equipment_count = Equipment.query.count()
     user_count = User.query.count()
@@ -21,6 +31,8 @@ def home():
 
 # --- Inventory Route  ---
 @admin_bp.route('/inventory')
+@login_required
+@admin_required
 def inventory_list():
     """Displays all equipment and finds any pending offers."""
     items = Equipment.query.order_by(Equipment.id).all()
@@ -35,6 +47,8 @@ def inventory_list():
 
 # --- NEW: Routes for Handling Offers ---
 @admin_bp.route('/offer/accept/<int:request_id>', methods=['POST'])
+@login_required
+@admin_required
 def accept_offer(request_id):
     """Accepts a borrow request."""
     borrow_request = BorrowRequest.query.get_or_404(request_id)
@@ -49,6 +63,8 @@ def accept_offer(request_id):
 
 
 @admin_bp.route('/offer/reject/<int:request_id>', methods=['POST'])
+@login_required
+@admin_required
 def reject_offer(request_id):
     """Rejects a borrow request."""
     borrow_request = BorrowRequest.query.get_or_404(request_id)
@@ -61,6 +77,8 @@ def reject_offer(request_id):
 
 # --- Existing Inventory Management Routes ---
 @admin_bp.route('/inventory/add', methods=['POST'])
+@login_required
+@admin_required
 def add_equipment():
     name = request.form.get('name')
     category = request.form.get('category')
@@ -69,6 +87,8 @@ def add_equipment():
     return redirect(url_for('admin.inventory_list'))
 
 @admin_bp.route('/inventory/update-status/<int:item_id>', methods=['POST'])
+@login_required
+@admin_required
 def update_status(item_id):
     new_status = request.form.get('status')
     inventory_manager.update_equipment_status(item_id, new_status)
