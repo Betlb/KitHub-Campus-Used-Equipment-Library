@@ -1,9 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from .borrow_context import BorrowContext
-from .borrow_strategy import StandardBorrowStrategy
-from .models import Equipment, User, BorrowRequest
-from datetime import datetime, timedelta
+from .models import Equipment
 from .db import db
 from .borrow_strategy import get_strategy_for_user
 
@@ -43,22 +41,14 @@ def borrow_form(item_id):
         strategy = get_strategy_for_user(user)
         context = BorrowContext(strategy)
         try:
-            context.borrow(user, item)
+            # BorrowContext creates the request
+            context.borrow(user, item, notes=request.form.get("notes", ""))
 
-            borrow_request = BorrowRequest(
-                user_id=user.id,
-                equipment_id=item.id,
-                start_date=datetime.now().strftime('%Y-%m-%d'),
-                end_date=(datetime.now() + timedelta(days=strategy.get_max_duration())).strftime('%Y-%m-%d'),
-                status="pending",
-                notes=request.form.get("notes", "")
-            )
+            # Update equipment status
             item.status = "borrowed"
-            db.session.add(borrow_request)
             db.session.commit()
 
             flash("Borrow request submitted!", "success")
-            
             return redirect(url_for('borrow.confirmation'))
 
         except Exception as e:
