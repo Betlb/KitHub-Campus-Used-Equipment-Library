@@ -55,7 +55,7 @@ def accept_offer(request_id):
     
     # Change request and equipment status
     borrow_request.status = 'approved'
-    borrow_request.equipment.status = 'borrowed' # <-- Now the item is borrowed
+    borrow_request.equipment.status = 'borrowed'
     
     db.session.commit()
     flash(f'Offer for "{borrow_request.equipment.name}" has been accepted.', 'success')
@@ -70,6 +70,7 @@ def reject_offer(request_id):
     borrow_request = BorrowRequest.query.get_or_404(request_id)
     
     borrow_request.status = 'rejected'
+    borrow_request.equipment.status = 'available'
     
     db.session.commit()
     flash(f'Offer for "{borrow_request.equipment.name}" has been rejected.', 'danger')

@@ -44,10 +44,6 @@ def borrow_form(item_id):
             # BorrowContext creates the request
             context.borrow(user, item, notes=request.form.get("notes", ""))
 
-            # Update equipment status
-            item.status = "borrowed"
-            db.session.commit()
-
             flash("Borrow request submitted!", "success")
             return redirect(url_for('borrow.confirmation'))
 
