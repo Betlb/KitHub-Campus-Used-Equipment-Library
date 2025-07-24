@@ -20,7 +20,9 @@ def register():
         user = UserFactory.create_user(role, name, password)
         db.session.add(user)
         db.session.commit()
-        login_user(user)                         # login
+        login_user(user)
+        if user.role == "admin":
+            return redirect(url_for("admin.home"))
         return redirect(url_for("borrow.catalog"))
 
     return render_template("register.html")
@@ -34,6 +36,8 @@ def login():
         user = User.query.filter_by(name=name).first()
         if user and user.check_password(password):
             login_user(user)
+            if user.role == "admin":
+                return redirect(url_for("admin.home"))
             return redirect(url_for("borrow.catalog"))
         return render_template("login.html", error="Invalid credentials")
     return render_template("login.html")
