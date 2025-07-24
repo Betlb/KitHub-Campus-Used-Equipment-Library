@@ -1,11 +1,19 @@
-<form method="post">
+{% extends "layout.html" %}
+{% block content %}
+<div class="borrow-form-container">
+  <h2>Borrow Equipment</h2>
+
   {% if error %}
-  <p style="color: red;">{{ error }}</p>
+    <div class="form-error">{{ error }}</div>
   {% endif %}
-  <p>You're about to borrow <strong>{{ item.name }}</strong>.</p>
 
-  <label for="notes">Notes (optional):</label><br>
-  <textarea name="notes" id="notes" rows="3" style="width:100%; margin-bottom: 10px;"></textarea>
+  <form method="post">
+    <p>You’re about to borrow: <strong>{{ item.name }}</strong></p>
 
-  <button type="submit" class="button">Confirm Borrow</button>
-</form>
+    <label for="notes">Notes (optional):</label>
+    <textarea name="notes" id="notes" rows="4" placeholder="e.g., Reason or usage duration..."></textarea>
+
+    <button type="submit" class="button">Confirm Borrow</button>
+  </form>
+</div>
+{% endblock %}
