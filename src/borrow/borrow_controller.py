@@ -39,7 +39,7 @@ def catalog():
 def borrow_form(item_id):
     item = Equipment.query.get_or_404(item_id)
     if request.method == 'POST':
-        user = User.query.get(1) 
+        user = current_user 
         strategy = get_strategy_for_user(user)
         context = BorrowContext(strategy)
         try:
@@ -65,3 +65,8 @@ def borrow_form(item_id):
             return render_template('borrow_form.html', item=item, error=str(e))
 
     return render_template('borrow_form.html', item=item)
+
+@borrow_bp.route('/confirmation')
+@login_required
+def confirmation():
+    return render_template('confirmation.html')

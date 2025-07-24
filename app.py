@@ -1,10 +1,10 @@
-from flask import Flask, render_template, redirect, url_for   
+from flask import Flask, render_template, redirect, url_for
 from flask_login import LoginManager, current_user
 from src.borrow.db import db
 from src.borrow.borrow_controller import borrow_bp
 from src.auth.auth_controller import auth_bp
+from src.borrow.admin_controller import admin_bp
 from src.borrow.models import User
-
 
 app = Flask(__name__)
 app.secret_key = 'KitHub'
@@ -22,11 +22,11 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-# ---------------------
 
 # Blueprints
+app.register_blueprint(auth_bp)
 app.register_blueprint(borrow_bp)
-app.register_blueprint(auth_bp)                         
+app.register_blueprint(admin_bp)
 
 @app.route('/')
 def home():
