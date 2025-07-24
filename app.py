@@ -31,6 +31,8 @@ app.register_blueprint(admin_bp)
 @app.route('/')
 def home():
     if current_user.is_authenticated:
+        if current_user.role == "admin":
+            return redirect(url_for('admin.home'))
         return redirect(url_for('borrow.catalog'))
     return redirect(url_for('auth.login'))
 
