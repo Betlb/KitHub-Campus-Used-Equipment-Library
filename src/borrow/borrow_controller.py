@@ -36,20 +36,18 @@ def catalog():
 @login_required
 def borrow_form(item_id):
     item = Equipment.query.get_or_404(item_id)
+    user = current_user
+    strategy = get_strategy_for_user(user)
+    max_duration = strategy.get_max_duration()
     if request.method == 'POST':
-        user = current_user 
-        strategy = get_strategy_for_user(user)
         context = BorrowContext(strategy)
         try:
             # BorrowContext creates the request
             context.borrow(user, item, notes=request.form.get("notes", ""))
-
             return redirect(url_for('borrow.confirmation'))
-
         except Exception as e:
-            return render_template('borrow_form.html', item=item, error=str(e))
-
-    return render_template('borrow_form.html', item=item)
+            return render_template('borrow_form.html', item=item, max_duration=max_duration, error=str(e))
+    return render_template('borrow_form.html', item=item, max_duration=max_duration)
 
 @borrow_bp.route('/confirmation')
 @login_required

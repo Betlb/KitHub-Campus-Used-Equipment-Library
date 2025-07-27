@@ -24,6 +24,11 @@ class StudentUser(User):
 class AdminUser(User):
     __mapper_args__ = {"polymorphic_identity": "admin"}
 
+class ClubUser(User):
+    __mapper_args__ = {
+        'polymorphic_identity': 'club',
+    }
+
 class Equipment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
