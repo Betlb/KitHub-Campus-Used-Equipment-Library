@@ -44,7 +44,6 @@ def borrow_form(item_id):
             # BorrowContext creates the request
             context.borrow(user, item, notes=request.form.get("notes", ""))
 
-            flash("", "success")
             return redirect(url_for('borrow.confirmation'))
 
         except Exception as e:
