@@ -6,7 +6,6 @@ from src.db.db import db
 from src.db.models import StudentUser, AdminUser, ClubUser, Equipment
 
 def seed_data():
-    # ---- Users ----
     admin   = AdminUser(name="root",   role="admin")
     student = StudentUser(name="alice", role="student")
     club = ClubUser(name="clubkit", role="club")
@@ -14,7 +13,6 @@ def seed_data():
     student.set_password("pass")
     club.set_password("pass")
 
-    # ---- Equipment ----
     cam  = Equipment(name="Camera",        category="media", status="available")
     osc  = Equipment(name="Oscilloscope",  category="lab",   status="available")
 

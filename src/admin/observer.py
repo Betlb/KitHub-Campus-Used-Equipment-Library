@@ -1,6 +1,3 @@
-# src/borrow/observer.py
-# Generic implementation of the Observer design pattern.
-
 from abc import ABC, abstractmethod
 
 class Observer(ABC):
