@@ -2,7 +2,6 @@ from .observer import Subject, Observer
 from ..db.db import db
 from ..db.models import Equipment
 
-# --- Concrete Subject ---
 class InventoryManager(Subject):
     """
     Manages inventory operations and notifies observers of changes.
@@ -31,7 +30,6 @@ class InventoryManager(Subject):
         self.notify(event="STATUS_UPDATED", data=equipment)
         return equipment
 
-# --- Concrete Observers ---
 class LoggingObserver(Observer):
     """An observer that logs inventory changes to the console."""
     def update(self, subject, event, data=None):

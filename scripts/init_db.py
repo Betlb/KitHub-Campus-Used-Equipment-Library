@@ -6,17 +6,31 @@ from src.db.db import db
 from src.db.models import StudentUser, AdminUser, ClubUser, Equipment
 
 def seed_data():
-    admin   = AdminUser(name="root",   role="admin")
-    student = StudentUser(name="alice", role="student")
-    club = ClubUser(name="clubkit", role="club")
-    admin.set_password("pass")          
-    student.set_password("pass")
-    club.set_password("pass")
+    # ---- Users ----
+    admin   = AdminUser(name="root", role="admin")
+    student1 = StudentUser(name="alice", role="student")
+    student2 = StudentUser(name="bob", role="student")
+    club1 = ClubUser(name="clubkit", role="club")
+    club2 = ClubUser(name="techclub", role="club")
 
-    cam  = Equipment(name="Camera",        category="media", status="available")
-    osc  = Equipment(name="Oscilloscope",  category="lab",   status="available")
+    for user in [admin, student1, student2, club1, club2]:
+        user.set_password("pass")
 
-    db.session.add_all([admin, student, cam, osc])
+    # ---- Equipment ----
+    equipment_list = [
+        Equipment(name="Camera",        category="media",     status="available"),
+        Equipment(name="Oscilloscope",  category="lab",       status="available"),
+        Equipment(name="Tripod",        category="media",     status="available"),
+        Equipment(name="Microscope",    category="lab",       status="available"),
+        Equipment(name="Laptop",        category="electronics", status="available"),
+        Equipment(name="3D Printer",    category="fabrication", status="available"),
+        Equipment(name="Microphone",    category="audio",     status="available"),
+        Equipment(name="Lighting Kit",  category="media",     status="available"),
+        Equipment(name="Soldering Station", category="lab",   status="available"),
+        Equipment(name="Projector",     category="electronics", status="available")
+    ]
+
+    db.session.add_all([admin, student1, student2, club1, club2] + equipment_list)
     db.session.commit()
     print("Sample data added!")
 
