@@ -1,4 +1,4 @@
-from ..borrow.models import StudentUser, AdminUser 
+from ..db.models import StudentUser, AdminUser 
 
 class UserFactory:
     @staticmethod

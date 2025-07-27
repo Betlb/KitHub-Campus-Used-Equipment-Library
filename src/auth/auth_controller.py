@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from ..borrow.db import db
-from ..borrow.models import User
+from ..db.db import db
+from ..db.models import User
 from .user_factory import UserFactory
 
 auth_bp = Blueprint("auth", __name__, template_folder="../../templates")

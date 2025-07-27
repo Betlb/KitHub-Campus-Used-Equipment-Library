@@ -1,6 +1,6 @@
 from .observer import Subject, Observer
-from .db import db
-from .models import Equipment
+from ..db.db import db
+from ..db.models import Equipment
 
 # --- Concrete Subject ---
 class InventoryManager(Subject):

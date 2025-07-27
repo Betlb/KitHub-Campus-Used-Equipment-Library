@@ -1,5 +1,5 @@
-from .db import db
-from .models import BorrowRequest
+from ..db.db import db
+from ..db.models import BorrowRequest
 from datetime import datetime, timedelta
 
 class BorrowContext:

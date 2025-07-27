@@ -1,6 +1,6 @@
 from sqlalchemy import or_
 from .base import EquipmentSearch
-from src.borrow.models import Equipment
+from src.db.models import Equipment
 
 class SearchFilterDecorator(EquipmentSearch):
     def __init__(self, wrapped, search_term):

@@ -2,8 +2,8 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app import app                     
-from src.borrow.db import db
-from src.borrow.models import StudentUser, AdminUser, Equipment
+from src.db.db import db
+from src.db.models import StudentUser, AdminUser, Equipment
 
 def seed_data():
     # ---- Users ----

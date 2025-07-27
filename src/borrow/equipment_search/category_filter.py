@@ -1,4 +1,4 @@
-from ..models import Equipment
+from ...db.models import Equipment
 from .base import EquipmentSearch
 
 class CategoryFilterDecorator(EquipmentSearch):

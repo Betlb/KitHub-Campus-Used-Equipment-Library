@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from .borrow_context import BorrowContext
-from .models import Equipment
-from .db import db
+from ..db.models import Equipment
+from ..db.db import db
 from .borrow_strategy import get_strategy_for_user
 
 from .equipment_search.base import BaseEquipmentSearch

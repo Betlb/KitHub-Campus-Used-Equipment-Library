@@ -1,10 +1,10 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_login import LoginManager, current_user
-from src.borrow.db import db
+from src.db.db import db
 from src.borrow.borrow_controller import borrow_bp
 from src.auth.auth_controller import auth_bp
-from src.borrow.admin_controller import admin_bp
-from src.borrow.models import User
+from src.admin.admin_controller import admin_bp
+from src.db.models import User
 
 app = Flask(__name__)
 app.secret_key = 'KitHub'

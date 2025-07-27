@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ..models import Equipment
+from ...db.models import Equipment
 
 class EquipmentSearch(ABC):
     @abstractmethod

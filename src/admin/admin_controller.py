@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
 from flask_login import current_user, login_required
 from functools import wraps
-from .models import Equipment, User, BorrowRequest  # <-- Import BorrowRequest
-from .db import db  # <-- Import db to make changes
+from ..db.models import Equipment, User, BorrowRequest  # <-- Import BorrowRequest
+from ..db.db import db  # <-- Import db to make changes
 from .inventory_manager import InventoryManager, LoggingObserver, NotificationObserver
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')

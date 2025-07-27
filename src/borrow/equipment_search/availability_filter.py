@@ -1,5 +1,5 @@
 from .base import EquipmentSearch
-from ..models import Equipment
+from ...db.models import Equipment
 
 class AvailabilityFilterDecorator(EquipmentSearch):
     def __init__(self, wrapped):
